@@ -1,32 +1,53 @@
-import "./App.css";
-import Home from "./components/pages/Home.jsx";
+import Home from "./components/Home.jsx";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [fortune, setFortune] = useState(""); // stores the advice data
-  const [error, setError] = useState(); // starts as undefined
+  const [fortune, setFortune] = useState("");
+  const [error, setError] = useState();
 
+  // controls whether history is visible
+  const [showHistory, setShowHistory] = useState(false);
+
+  const toggleHistory = () => {
+    setShowHistory((prev) => !prev);
+  };
+
+  // handle api req
   const fetchData = async () => {
     try {
+      setError(undefined);
       const response = await fetch("https://api.adviceslip.com/advice");
-
-      const result = await response.json(); // wait for the data to come back to u
-      // console.log(result);
-      // console.log(result.slip.advice);
+      const result = await response.json();
       setFortune(result.slip.advice);
     } catch (err) {
       setError(err);
     }
   };
 
+  const clearFortune = () => {
+    setFortune("");
+    setError(undefined);
+  };
+
   return (
-    <>
-      <Header></Header>
-      <Home fetchData={fetchData} fortune={fortune} error={error}></Home>
-      <Footer></Footer>
-    </>
+    <div className="app-shell">
+      <Header toggleHistory={toggleHistory} />
+
+      <main className="app-main">
+        <Home
+          fetchData={fetchData}
+          fortune={fortune}
+          error={error}
+          clearFortune={clearFortune}
+          showHistory={showHistory}
+        />
+      </main>
+
+      <Footer />
+    </div>
   );
 }
 

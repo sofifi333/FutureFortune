@@ -1,9 +1,13 @@
 import "./Components.css";
 
-export default function Header() {
+export default function Header({ toggleHistory }) {
   return (
     <div className="header">
-      <button id="history-btn">this is the history button</button>
+      <div className="history-wrapper">
+        <button className="btn" onClick={toggleHistory}>
+          My Cookies
+        </button>
+      </div>
     </div>
   );
 }
