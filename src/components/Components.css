@@ -60,7 +60,7 @@
   justify-content: center;
 }
 
-.home-description {
+.cookie-generation {
   display: flex col;
   border: solid;
   width: 40%;
@@ -71,13 +71,21 @@
   text-align: center;
 }
 
-.home-description #gen-cookie-btn {
+.cookie-generation #gen-cookie-btn {
   background-color: antiquewhite;
   margin-bottom: 20px;
 }
+.cookie-gen-hidden {
+  display: none;
+}
+
+.fortune-hidden {
+  /* this is the starting value of the state fortuneClass */
+  display: none;
+}
 
 .fortune {
-  display: flex col;
+  display: flex-col;
   text-align: center;
   margin-left: 20%;
   margin-right: 20%;
@@ -86,6 +94,7 @@
   width: 100px;
   height: 100px;
 }
+
 /* 
 .fortune #fortune-button {
 } */
